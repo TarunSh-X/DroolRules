@@ -6,32 +6,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.javainuse.model.Product;
-import com.javainuse.model.Rule;
 
 @Service
-public class JewelleryShopService {
+public class RuleService {
 
 	private final KieContainer kieContainer;
 
 	@Autowired
-	public JewelleryShopService(KieContainer kieContainer) {
+	public RuleService(KieContainer kieContainer) {
 		this.kieContainer = kieContainer;
 	}
 
-/*	public Product getProductDiscount(Product product) {
+	public Product getProductDiscount(Product product) {
 		KieSession kieSession = kieContainer.newKieSession("rulesSession");
 		kieSession.insert(product);
 		kieSession.fireAllRules();
 		kieSession.dispose();
 		return product;
-	}
-	*/
-
-	public Rule getRules(Rule ruleObject) {
-		KieSession kieSession = kieContainer.newKieSession("rulesSession");
-		kieSession.insert(ruleObject);
-		kieSession.fireAllRules();
-		kieSession.dispose();
-		return ruleObject;
 	}
 }

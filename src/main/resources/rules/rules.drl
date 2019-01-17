@@ -1,15 +1,33 @@
 package rules
  
-import com.javainuse.model.Product
-rule "Offer for Diamond"
+import com.javainuse.model.Rule
+rule "Contribution Type is Match and singleTier"
 	when 
-		productObject: Product(type=="diamond")
+		ruleObject: Rule(contributionType=="match" && calculationType=="singleTier" && calculationFrequency=="monthly")
 	then
-		productObject.setDiscount(15);
+		ruleObject.setContibutionRules("0% to 6% =>100% company match");
 	end
-rule "Offer for Gold"
+rule "Contribution Type is Match and twoTier"
 	when 
-		productObject: Product(type=="gold")
+		ruleObject: Rule(contributionType=="match" && calculationType=="twoTier" && calculationFrequency=="monthly")
 	then
-		productObject.setDiscount(25);
+		ruleObject.setContibutionRules("0% to 4.99% =>100% company match");
+	end
+rule "Contribution Type is Match and threeTier"
+	when 
+		ruleObject: Rule(contributionType=="match" && calculationType=="threeTier" && calculationFrequency=="monthly")
+	then
+		ruleObject.setContibutionRules("1% to 3.99% =>100% company match");
+	end
+rule "Contribution Type is No Match and flat amount"
+	when 
+		ruleObject: Rule(contributionType=="noMatch" && calculationType=="flatAmount" && calculationFrequency=="quarterly")
+	then
+		ruleObject.setContibutionRules("$150 after 1 year of service");
+	end
+rule "Contribution Type is No Match and percentage"
+	when 
+		ruleObject: Rule(contributionType=="noMatch" && calculationType=="percentage" && calculationFrequency=="annually")
+	then
+		ruleObject.setContibutionRules("5% of compensation");
 	end
